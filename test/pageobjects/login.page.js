@@ -14,23 +14,14 @@ class LoginPage {
   get errorMessage() {
     return $('//*[@content-desc="test-Error message"]/android.widget.TextView')
   }
-  get titleHomePage() {
-    return $('.android.widget.TextView')
-  }
   get autoFillUser1() {
-    return $('//android.widget.TextView[@text="standard_user"]')
+    return $('~test-standard_user')
   }
   get autoFillUser2() {
-    return $('//android.widget.TextView[@text="locked_out_user"]')
+    return $('~test-locked_out_user')
   }
   get autoFillUser3() {
-    return $('//android.widget.TextView[@text="problem_user"]')
-  }
-  get menuButton() {
-    return $('~test-Menu')
-  }
-  get logoutButton() {
-    return $('//android.view.ViewGroup[@content-desc="test-LOGOUT"]')
+    return $('~test-problem_user')
   }
 
   async inputValidUsername() {
@@ -45,9 +36,12 @@ class LoginPage {
   async inputInvalidPassword() {
     await this.passwordInputField.setValue('pass_random')
   }
-  async inputEmpty(field) {
-    await field.setValue('')
+
+  async inputCustomLogin(username, password) {
+    await this.usernameInputField.setValue(username)
+    await this.passwordInputField.setValue(password)
   }
+
   async clickLoginButton() {
     await this.loginButton.click()
   }
@@ -62,12 +56,6 @@ class LoginPage {
   async clickAutoFill3() {
     await scrollScreenVertical(600, 100)
     await this.autoFillUser3.click()
-  }
-  async clickMenuButton() {
-    await this.menuButton.click()
-  }
-  async clickLogoutButton() {
-    await this.logoutButton.click()
   }
 }
 
